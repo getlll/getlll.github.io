@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>填写订单</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <link href="resource/mui.min.css" rel="stylesheet">
+    <style>
+        span {
+            font-family: "微软雅黑";
+            font-size: 1.0rem;
+            font-weight: 900;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="resource/mui.min.js"></script>
+    <script type="text/javascript">
+        mui.init()
+    </script>
+    <script src="resource/jq.js"></script>
+    <script src="resource/jquery.copy.js"></script>
+    <script src="resource/clipboard.min.js"></script>
+
+
+    <div class="one" style="text-align: center;"></div>
+
+
+
+    <div style="text-align: center;width:100%; margin-top: 30px;">
+        <div style="display: inline ;font-size: 25px;">
+            <label for="qi">汽车站</label>
+            <input type="radio" onclick="one()" style="zoom: 220%;" name="cate" id="qi"
+                value="汽车站">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</input>
+            <label for="de">德邦</label>
+            <input type="radio" onclick="two()" style="zoom: 220%;" name="cate" id="de"
+                value="德邦">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </div>
+    </div>
+
+    <div style="margin-top:1rem;color: rgb(130,130,130);padding: 1rem;">
+        <span>单号：</span>
+        <input type="text" id="dan" oninput="change()"><br><br>
+        <span>运费：</span>
+        <input type="number" id="yun" value="25"><br><br>
+        <span>操作费：</span>
+        <input type="number" id="cao" value="40"><br><br>
+
+        <div class="chezhan" style="display: none;">
+            <span>发车时间：</span>
+
+            <div style="text-align: center;width:100%; font-size: 25px;">
+                <div style="display: flex; justify-content: center; ">
+                    <div style="flex-grow: 1.5;">
+                    </div>
+
+                    <div style="flex-grow: 2;">
+                        <label for="s6">6:30</label>
+                        <input type="radio" onclick="shijian1()" style="zoom: 220%;" name="cate1" value="10:30">
+                    </div>
+
+                    <div style="flex-grow: 2;">
+                        <label for="s6">12:30</label>
+                        <input type="radio" onclick="shijian1()" style="zoom: 220%;" name="cate1" value="16:30">
+                    </div>
+
+                    <div style="flex-grow: 1.5;">
+                    </div>
+
+                </div>
+
+                <div style="display: flex; justify-content: center; margin-top: 20px;">
+                    <div style="flex-grow: 1.5;">
+                    </div>
+
+                    <div style="flex-grow: 2;">
+                        <label for="s6">7:30</label>
+                        <input type="radio" onclick="shijian1()" style="zoom: 220%;" name="cate1" value="11:30">
+                    </div>
+
+                    <div style="flex-grow: 2;">
+                        <label for="s6">14:00</label>
+                        <input type="radio" onclick="shijian1()" style="zoom: 220%;" name="cate1" value="18:00">
+                    </div>
+                    <div style="flex-grow: 1.5;">
+                    </div>
+
+                </div>
+
+                <div style="display: flex; justify-content: center;margin-top: 20px; ">
+                    <div style="flex-grow: 1.5;">
+                    </div>
+                    <div style="flex-grow: 2;">
+                        <label for="s6">8:30</label>
+                        <input type="radio" onclick="shijian1()" style="zoom: 220%;" name="cate1" value="12:30">
+                    </div>
+
+                    <div style="flex-grow: 2;">
+                        <label for="s6">15:20</label>
+                        <input type="radio" onclick="shijian1()" style="zoom: 220%;" name="cate1" value="19:20">
+                    </div>
+                    <div style="flex-grow: 1.5;">
+                    </div>
+                </div>
+
+                <div style="display: flex; justify-content: center;margin-top: 20px; ">
+                    <div style="flex-grow: 1.5;">
+                    </div>
+                    <div style="flex-grow: 2;">
+                        <label for="s6">9:30</label>
+                        <input type="radio" onclick="shijian1()" style="zoom: 220%;" name="cate1" value="13:30">
+                    </div>
+
+                    <div style="flex-grow: 5;">
+
+                    </div>
+                    <div style="flex-grow: 2;">
+             
+                    </div>
+                </div>
+            </div>
+
+
+
+            <span>车牌号：</span>
+            <input type="text" id="che"><br><br>
+
+
+            <span>到达城市：</span>
+            <input type="text" id="dao" value="济南汽车总站"><br><br>
+
+        </div>
+
+
+        <div class="debang" style="display: none;">
+            <span>德邦单号：</span>
+            <input type="number" id="debangdan"><br><br>
+        </div>
+
+
+
+        <div style="text-align: center;">
+            <button type="submit"
+                style="width:80%;margin-top: 2rem;border-radius: 2rem;height:2.5rem; background-color: aquamarine;"
+                class="copy" id="sub" value="复制">
+                复制
+            </button>
+        </div>
+    </div>
+
+    <script>
+        var ty = 0;
+        var zong;
+        var de = document.getElementById("de");
+        var qi = document.getElementById("qi");
+        var dediv = document.getElementsByClassName("debang")[0];
+        var chezhan = document.getElementsByClassName("chezhan")[0];
+
+        function one() {
+            dediv.style.display = "none";
+            chezhan.style.display = "block";
+            document.getElementById("yun").value = 25;
+            ty = 1;
+        }
+
+        function two() {
+            dediv.style.display = "block";
+            document.getElementById("yun").value = 0;
+            chezhan.style.display = "none";
+            ty = 2;
+        }
+        function shijian1(obj) {
+            var cate = document.getElementsByName("cate1");
+            var che = document.getElementById("che");
+            var dao = document.getElementById("dao");
+            var ca;
+            for (var idx in cate) {
+                if (cate[idx].checked) {
+                    ca = cate[idx].value;
+                    break;
+                }
+            }
+
+            if (ca.indexOf("10:30") != -1) {
+                che.value = "08F00"
+                dao.value = "济南汽车总站"
+            } else if (ca.indexOf("11:30") != -1) {
+                che.value = "1677"
+                dao.value = "济南汽车总站"
+            } else if (ca.indexOf("12:30") != -1) {
+                che.value = "8185"
+                dao.value = "济南汽车总站"
+            } else if (ca.indexOf("13:30") != -1) {
+                che.value = "0628"
+                dao.value = "济南火车总站"
+            } else if (ca.indexOf("16:30") != -1) {
+                che.value = "0657"
+                dao.value = "济南汽车总站"
+            } else if (ca.indexOf("18:00") != -1) {
+                dao.value = "济南火车总站"
+                che.value = ""
+            } else if (ca.indexOf("19:20") != -1) {
+                dao.value = "济南汽车总站"
+                che.value = "9291"
+            }
+        }
+
+        function change(params) {
+
+            var dan = document.getElementById("dan").value.replace(/\s+/g, "");
+            console.log(dan)
+            if (dan.length > 8 && dan.length <= 16) {
+                var str = dan.substring(0, 8) + "  " + dan.substring(8);
+                document.getElementById("dan").value = str;
+            } else if (dan.length > 16) {
+                console.log("jin" + dan)
+                console.log(dan.substr(8, 16))
+                var str = dan.substring(0, 8) + "  ";
+                var s = dan.substring(8, 16) + "  "
+                var v = dan.substring(16);
+                str = str + s + v
+                console.log(str)
+                document.getElementById("dan").value = str;
+            } else {
+                document.getElementById("dan").value = dan;
+            }
+
+        }
+
+        function check(params) {
+            var dan = document.getElementById("dan").value
+            var yun = document.getElementById("yun").value
+            var cao = document.getElementById("cao").value
+            var cate = document.getElementsByName("cate1");
+            var che = document.getElementById("che").value
+            var dao = document.getElementById("dao").value
+            var shi;
+            for (var idx in cate) {
+                if (cate[idx].checked) {
+                    shi = cate[idx].value;
+                    break;
+                }
+            }
+            var debang = document.getElementById("debangdan").value;
+
+            if (ty == 0) {
+                mui.alert("方式没有填写", "抱歉", "返回重填")
+                return;
+            }
+            if (dan == "" || dan == undefined) {
+                mui.alert("单号没有填写", "抱歉", "返回重填")
+                return;
+            }
+            var dan111 = document.getElementById("dan").value.replace(/\s+/g, "");
+            if (dan111==null||dan111.length%8!=0) {
+                mui.alert("单号填写错误", "抱歉", "返回重填")
+                return;
+            }
+            if (yun == "" || yun == undefined) {
+                mui.alert("运费没有填写", "抱歉", "返回重填")
+                return;
+            }
+            if (cao == "" || cao == undefined) {
+                mui.alert("操作费没有填写", "抱歉", "返回重填")
+                return;
+            }
+
+            if (ty == 1) {
+                if (shi == "" || shi == undefined) {
+                    mui.alert("发车时间没有填写", "抱歉", "返回重填")
+                    return;
+                }
+
+                if (dao == "" || dao == undefined) {
+                    mui.alert("到达城市没有填写", "抱歉", "返回重填")
+                    return;
+                }
+                zong = ""
+                if (dan.length > 8) {
+                    zong = "本单共有" + parseInt(dan.length / 8) + "例\n"
+                }
+                if (che==null||che.length==0) {
+                    che="未知"
+                }
+                var myDate = new Date();
+                zong = zong + "单号：" + dan + "\n" + "日期：" + myDate.getFullYear() + "." + parseInt(parseInt(myDate.getMonth()) + 1) + "." + myDate.getDate() + "\n" + "费用：运费" + yun + "元+操作费" + cao + "元\n鱼台\n车牌号：" + che + "\n" + shi + "到" + dao;
+
+            }
+
+            if (ty == 2) {
+                if (debang == "" || debang == undefined) {
+                    mui.alert("德邦运单号没有填写", "抱歉", "返回重填")
+                    return;
+                }
+                zong = "";
+                var myDate = new Date();
+                if (dan.length > 8) {
+                    zong = "本单共有" + parseInt(dan.length / 8) + "例\n"
+                }
+                console.log(myDate.getMonth())
+                zong = zong + "单号：" + dan + "\n" + "日期：" + myDate.getFullYear() + "." + parseInt(parseInt(myDate.getMonth()) + 1) + "." + myDate.getDate() + "\n" + "费用：运费" + yun + "元+操作费" + cao + "元\n鱼台\n德邦物流号：" + debang;
+
+            }
+        }
+
+
+        var clipboard = new ClipboardJS('.copy', {
+            text: function () {
+                check();
+                return zong ;
+            }
+        });1
+
+        clipboard.on('success', function (e) {
+
+            mui.alert(zong, "核对信息", "确定",function (params) {
+                window.location.href = "weixin://";
+                
+            })
+
+        });
+
+        clipboard.on('error', function (e) {
+            console.log(e);
+        });
+
+    </script>
+</body>
+
+</html>
